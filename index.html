@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:site_name" content="Ajwath Tech">
 <title>Ajwath Tech — Web Design, IT Support & POS Systems</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" href="aj_tech_logo.png" type="image/png>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -140,6 +142,15 @@ nav{
   color:var(--ivory-dim);
 }
 .hero .ctas{display:flex; gap:18px; margin-top:42px; flex-wrap:wrap;}
+.availability-badge{
+   font-family:'JetBrains Mono', monospace; font-size:0.7rem;
+   letter-spacing:0.12rem; text-transform:uppercase color:var(--gold);
+   margin-bottom:18px;
+}
+.stats-row{display:flex; gap:44px; margin-top:52px; padding-top:32px; border-top:1px solid var(--hairline); flex-wrap:wrap;}
+.stat-item .num{font-family:'Fraunces',serif; font-style:italic; font-size:1.9rem; color:var(--gold-light;)}
+.stat-item .label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08rem; color:var(--ivory-dim); margin-top:5px;}
+
 .btn{
   padding:15px 30px;
   border-radius:var(--radius);
@@ -311,10 +322,12 @@ footer{
   <div class="hero-lines"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
+  <div class="availability-badge" id="availability-badge"></div>
     <div class="eyebrow-label"><span class="rule"></span> <span id="hero-eyebrow"></span></div>
     <h1 id="hero-title"></h1>
     <p class="lede" id="hero-lede"></p>
     <div class="ctas">
+    <div class="stats-row" id="stats-row"></div>
       <a class="btn btn-primary" id="hero-cta-primary" href="#" target="_blank" rel="noopener">Start a Project</a>
       <a class="btn btn-ghost" href="#portfolio">View Portfolio</a>
     </div>
@@ -411,6 +424,11 @@ footer{
 const SITE = {
   hero: {
     eyebrow: "Sri Lanka",
+    availability:" Availability for new projects",
+    stats: [
+       { num: "20+", label "Projects Completed" },
+       { num: "&yr", label: "IT Experience" }
+   ],
     title_line1: "Considered work,",
     title_line2: "quietly done well",
     lede: "Ajwath Tech builds websites, IT support and POS systems for small businesses — handled personally, start to finish, with the same care regardless of the size of the job.",
@@ -496,6 +514,14 @@ document.getElementById('hero-title').innerHTML =
   SITE.hero.title_line1 + "<br><em>" + SITE.hero.title_line2 + "</em>";
 document.getElementById('hero-lede').textContent = SITE.hero.lede;
 document.getElementById('hero-cta-primary').href = SITE.hero.whatsapp_url;
+document.getElementById('availability-badge').textContent = SITE.hero.availability;
+const statsRow = document.getElementById('stats-row');
+SITE.hero.stats.forEach(s => {
+   const el = document.createElement('div');
+   el.className = 'stat-item';
+   el.innerHTML = <div class="num">${s.num}</div><div class="label">${s.label}</div>;
+   statsRow.appendChild(el);
+});
 
 const logList = document.getElementById('log-list');
 SITE.log.forEach(entry => {
